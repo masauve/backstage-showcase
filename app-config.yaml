@@ -9,7 +9,7 @@ app:
       testMode: ${SEGMENT_TEST_MODE} # prevents data from being sent if true
 
 organization:
-  name: Janus IDP
+  name: MyOCP IDP
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
@@ -66,70 +66,6 @@ integrations:
           privateKey: |
             ${GITHUB_APP_PRIVATE_KEY}
 
-  # Plugin: GitLab
-  gitlab:
-    - host: gitlab.com
-      token: ${GITLAB_TOKEN}
-
-  # Plugin: Azure DevOps
-  azure:
-    - host: dev.azure.com
-      token: ${AZURE_TOKEN}
-
-# Plugin: Azure DevOps
-azureDevOps:
-  host: dev.azure.com
-  token: ${AZURE_TOKEN}
-  organization: ${AZURE_ORG}
-
-proxy:
-  ### Example for how to add a proxy endpoint for the frontend.
-  ### A typical reason to do this is to handle HTTPS and CORS for internal services.
-  # '/test':
-  #   target: 'https://example.com'
-  #   changeOrigin: true
-
-  # Plugin: Quay
-  '/quay/api':
-    target: https://quay.io/
-    headers:
-      X-Requested-With: 'XMLHttpRequest'
-      # Uncomment the following line to access a private Quay Repository using a token
-      # Authorization: 'Bearer <YOUR TOKEN>'
-    changeOrigin: true
-    secure: true
-
-  # Plugin: SonarQube
-  '/sonarqube':
-    # if not using sonarqube, assign SONARQUBE_URL to https://sonarcloud.io
-    # target: https://sonarcloud.io/api
-    target: ${SONARQUBE_URL}/api
-    allowedMethods: ['GET']
-    auth: ${SONARQUBE_TOKEN}
-
-  # Plugin: Jenkins
-  '/jenkins/api':
-    target: ${JENKINS_URL}
-    headers:
-      Authorization: ${JENKINS_TOKEN}
-
-  # Plugin: Jira
-  '/jira/api':
-    target: ${JIRA_URL}
-    headers:
-      Authorization: ${JIRA_TOKEN}
-      Accept: 'application/json'
-      Content-Type: 'application/json'
-      X-Atlassian-Token: 'no-check'
-      User-Agent: ${JIRA_USER_AGENT}
-
-  # Plugin: Jfrog Artifactory
-  '/jfrog-artifactory/api':
-    target: ${ARTIFACTORY_URL}
-    headers:
-      Authorization: Bearer ${ARTIFACTORY_TOKEN}
-    # Change to "false" in case of using self hosted artifactory instance with a self-signed certificate
-    secure: ${ARTIFACTORY_SECURE}
 
 # Reference documentation http://backstage.io/docs/features/techdocs/configuration
 # Note: After experimenting with basic setup, use CI/CD to generate docs

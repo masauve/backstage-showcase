@@ -1,6 +1,7 @@
 # macOS
 .DS_Store
 
+
 # Logs
 logs
 *.log
@@ -27,6 +28,7 @@ node_modules/
 # dotenv environment variables file
 .env
 .env.test
+*.pem
 
 # Build output
 dist
